@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ⚙️ CodePipeline with Terraform & DevSecOps using GitHub Actions and Kubernetes Sealed Secrets
 
 This project establishes a robust CI/CD pipeline on AWS using Terraform, enhanced with cutting-edge DevSecOps practices via GitHub Actions. It provisions an end-to-end AWS CodePipeline (Source, Build, Deploy to EC2) and validates infrastructure with Terratest. Further, it integrates GitHub Actions for automated DevSecOps, incorporating security scanning (tfsec for Terraform, Trivy for Docker images) and secure secret management with Kubernetes Sealed Secrets. This ensures a secure, automated, and efficient application delivery workflow, triggered on every code push.
@@ -471,3 +472,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 **Email:**  jivanjyoti.pal@gmail.com
 
+=======
+# DevOps-Masters-Project-Main
+>>>>>>> 7e3f5adf7c1f6e44c72ebe7e46b8a7bd3691d436
