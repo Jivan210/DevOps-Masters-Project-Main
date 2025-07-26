@@ -1,8 +1,8 @@
-# ⚙️ CodePipeline with Terraform & DevSecOps using GitHub Actions and Kubernetes Sealed Secrets
+#  CodePipeline with Terraform & DevSecOps using GitHub Actions and Kubernetes Sealed Secrets
 
 This project establishes a robust CI/CD pipeline on AWS using Terraform, enhanced with cutting-edge DevSecOps practices via GitHub Actions. It provisions an end-to-end AWS CodePipeline (Source, Build, Deploy to EC2) and validates infrastructure with Terratest. Further, it integrates GitHub Actions for automated DevSecOps, incorporating security scanning (tfsec for Terraform, Trivy for Docker images) and secure secret management with Kubernetes Sealed Secrets. This ensures a secure, automated, and efficient application delivery workflow, triggered on every code push.
 
-# 🏛️ Project Architecture
+# Project Architecture
 
 ```mermaid
 flowchart TD
@@ -10,32 +10,32 @@ flowchart TD
   direction TB
 
   %% Developer
-  subgraph DEV["👨‍💻 Developer"]
-    A1["💻 Push Code to GitHub"]
+  subgraph DEV[" Developer"]
+    A1[" Push Code to GitHub"]
   end
 
   %% GitHub Actions CI/CD Flow
-  subgraph CICD["🔁 CI/CD with GitHub Actions"]
-    B1["⚙️ GitHub Actions Workflow"]
-    B2["🔍 tfsec - Terraform Security Scan"]
-    B3["🔐 Trivy - Docker Image Scan"]
-    B4["🔑 Sealed Secrets CLI"]
+  subgraph CICD[" CI/CD with GitHub Actions"]
+    B1[" GitHub Actions Workflow"]
+    B2[" tfsec - Terraform Security Scan"]
+    B3[" Trivy - Docker Image Scan"]
+    B4[" Sealed Secrets CLI"]
   end
 
   %% AWS Infra
-  subgraph AWS["☁️ AWS Infrastructure via Terraform"]
-    C1["📦 S3 Bucket\n(Artifact Storage)"]
-    C2["🏗️ CodeBuild\n(Build & Test)"]
-    C3["🚀 CodeDeploy\n(EC2 Deployment)"]
-    C4["🔁 CodePipeline\n(CI/CD Orchestrator)"]
-    C5["🔐 IAM Roles & Policies"]
+  subgraph AWS[" AWS Infrastructure via Terraform"]
+    C1[" S3 Bucket\n(Artifact Storage)"]
+    C2[" CodeBuild\n(Build & Test)"]
+    C3[" CodeDeploy\n(EC2 Deployment)"]
+    C4[" CodePipeline\n(CI/CD Orchestrator)"]
+    C5[" IAM Roles & Policies"]
   end
 
   %% Kubernetes Cluster
-  subgraph K8S["📦 Kubernetes Cluster"]
-    D1["🧩 SealedSecrets Controller"]
-    D2["🛠️ Workload using Secrets"]
-    D3["☸️ Kubernetes Workloads"]
+  subgraph K8S[" Kubernetes Cluster"]
+    D1[" SealedSecrets Controller"]
+    D2[" Workload using Secrets"]
+    D3[" Kubernetes Workloads"]
   end
 
   %% Flow connections
@@ -55,17 +55,17 @@ flowchart TD
   C3 --> D3
 ```
 
-## ✨ Features
+##  Features
 
--   ⚙️ **End-to-end AWS CodePipeline**: Fully provisioned with Terraform (Source, Build, Deploy).
--   🚀 **CI/CD Automation**: Leverages GitHub Actions for seamless workflow orchestration.
--   🔒 **DevSecOps Integration**: Incorporates `tfsec` for Terraform security and `Trivy` for Docker image vulnerability scanning.
--   🔑 **Secure Secret Management**: Utilizes Kubernetes Sealed Secrets for encrypting and managing sensitive data.
--   🧪 **Infrastructure Testing**: Validates Terraform modules and deployed infrastructure using Terratest.
--   ☁️ **Flexible Deployment**: Supports deployment to AWS EC2 instances and Kubernetes clusters.
--   🔐 **IAM & S3**: Configures necessary IAM roles and S3 buckets for artifact storage.
+-    **End-to-end AWS CodePipeline**: Fully provisioned with Terraform (Source, Build, Deploy).
+-    **CI/CD Automation**: Leverages GitHub Actions for seamless workflow orchestration.
+-    **DevSecOps Integration**: Incorporates `tfsec` for Terraform security and `Trivy` for Docker image vulnerability scanning.
+-    **Secure Secret Management**: Utilizes Kubernetes Sealed Secrets for encrypting and managing sensitive data.
+-    **Infrastructure Testing**: Validates Terraform modules and deployed infrastructure using Terratest.
+-    **Flexible Deployment**: Supports deployment to AWS EC2 instances and Kubernetes clusters.
+-    **IAM & S3**: Configures necessary IAM roles and S3 buckets for artifact storage.
 
-## 💻 Tech Stack
+##  Tech Stack
 
 | Category           | Tools / Platforms                                  |
 |--------------------|----------------------------------------------------|
@@ -77,7 +77,7 @@ flowchart TD
 | **Containers**     | Docker, Kubernetes                                 |
 | **Languages**      | Go (Terratest), YAML                               |
 
-## ⚙️ Installation
+##  Installation
 
 To set up and run this project, follow these steps:
 
@@ -118,8 +118,6 @@ To set up and run this project, follow these steps:
     instance_tag_value = "MyAppServer"
     ```
 
-    ⚠️ **Warning:** Never commit `terraform.tfvars` to GitHub as it may contain sensitive information like your GitHub token.
-
 5.  **Provision AWS Infrastructure with Terraform**
 
     ```bash
@@ -132,7 +130,7 @@ To set up and run this project, follow these steps:
 
 _Ensure all necessary environment variables (e.g., AWS credentials, GitHub tokens) are securely configured in your CI/CD environment or local setup._
 
-## 🚀 Usage / How it Works
+##  Usage / How it Works
 
 This project is divided into two main tasks: provisioning an AWS CodePipeline with Terraform and enhancing it with DevSecOps practices using GitHub Actions and Kubernetes Sealed Secrets.
 
@@ -140,24 +138,24 @@ This project is divided into two main tasks: provisioning an AWS CodePipeline wi
 
 This task focuses on provisioning a CI/CD pipeline using AWS CodePipeline, CodeBuild, and CodeDeploy with Terraform. It sets up an automated deployment from GitHub to an EC2 instance, with infrastructure validation using Terratest.
 
-#### 📌 Task Objectives
+#### Task Objectives
 
 -   Use Terraform to provision AWS CodePipeline with Source (GitHub), Build (AWS CodeBuild), and Deploy (AWS CodeDeploy to EC2) stages.
 -   Define infrastructure as code for CodePipeline, CodeBuild, CodeDeploy, IAM roles/policies, and an S3 artifact bucket.
 -   Write infrastructure tests using [Terratest](https://terratest.gruntwork.io/) to validate Terraform modules.
 -   Apply Terraform and verify a successful deployment.
 
-#### 📦 Prerequisites for Application Deployment
+#### Prerequisites for Application Deployment
 
 Your application repository must contain:
--   ✅ [`buildspec.yml`](examples/buildspec.yml): Defines the build and artifact steps for AWS CodeBuild.
--   ✅ [`appspec.yml`](examples/appspec.yml): Required by AWS CodeDeploy for EC2 deployments.
--   ✅ [`scripts/install.sh`](examples/scripts/install.sh): Script to install dependencies on the EC2 instance.
--   ✅ [`scripts/start.sh`](examples/scripts/start.sh): Script to start your application (e.g., a React app).
+-    [`buildspec.yml`](examples/buildspec.yml): Defines the build and artifact steps for AWS CodeBuild.
+-    [`appspec.yml`](examples/appspec.yml): Required by AWS CodeDeploy for EC2 deployments.
+-    [`scripts/install.sh`](examples/scripts/install.sh): Script to install dependencies on the EC2 instance.
+-    [`scripts/start.sh`](examples/scripts/start.sh): Script to start your application (e.g., a React app).
 
 You can copy these example files from the `examples/` folder in this repository or refer to a working example application repository.
 
-#### 🧪 Infrastructure Testing with Terratest
+#### Infrastructure Testing with Terratest
 
 To validate the Terraform modules using Terratest:
 
@@ -212,22 +210,13 @@ To validate the Terraform modules using Terratest:
     ```
     This will initialize and apply your Terraform, capture and assert outputs, and automatically destroy resources.
     
-## 📸 Screenshots
+##  Screenshots
 <img width="1445" height="668" alt="image" src="https://github.com/user-attachments/assets/b856832b-07f9-49de-94bd-732a15aeb94f" />
 <img width="1826" height="254" alt="image" src="https://github.com/user-attachments/assets/81fe1e99-62b0-4da1-89c2-14ab7733882e" />
 <img width="1450" height="612" alt="image" src="https://github.com/user-attachments/assets/55e426f4-3793-42a5-be7e-f2e6d7d56693" />
 <img width="1455" height="540" alt="image" src="https://github.com/user-attachments/assets/47ee740f-fe8b-44f6-af5f-880f0e031717" />
 <img width="1490" height="720" alt="image" src="https://github.com/user-attachments/assets/6eb0f673-2287-4fac-84a6-faa22197418f" />
 <img width="1719" height="656" alt="Screenshot 2025-07-17 014517" src="https://github.com/user-attachments/assets/3ce666c6-7ff6-4fc4-8dbc-79f3ae70c13c" />
-
-## 🧠 Common Problems & Fixes
-
-| Problem                                    | Fix                                                                            |
-|-------------------------------------------|---------------------------------------------------------------------------------|
-| ❌ `HEALTH_CONSTRAINTS` error in CodeDeploy | Ensure your EC2 IAM role has `s3:GetObject` permissions on the artifact bucket |
-| ❌ EC2 agent not running                    | Check if `codedeploy-agent` is running (see `user_data` script in `main.tf`)   |
-| ❌ Pipeline fails at source                 | Verify GitHub repo, branch name, and token permissions                         |
-| ❌ Build fails                              | Check `buildspec.yml` and make sure it's valid and points to correct scripts   |
 
 ### Task 2: DevSecOps Integration using GitHub Actions and Sealed Secrets
 
@@ -335,7 +324,6 @@ This task integrates advanced DevSecOps practices into the CI/CD pipeline using 
           name: db-creds
           namespace: default
     ```
-    📌 Save this in your repo at: `k8s/secrets/sealed-secret.yaml`
 
     **Sample `deployment.yaml` for Kubernetes**
     This demonstrates how your application deployment can consume the secrets.
@@ -373,7 +361,6 @@ This task integrates advanced DevSecOps practices into the CI/CD pipeline using 
                       name: db-creds
                       key: password
     ```
-    📌 Save this as: `k8s/manifests/deployment.yaml`
 
 4.  **Deploy to Kubernetes in Workflow**
 
@@ -405,9 +392,8 @@ This task integrates advanced DevSecOps practices into the CI/CD pipeline using 
             run: kubectl apply -f k8s/manifests/
     ```
 
-    **NOTE:** Store your `kubeconfig` securely as a GitHub secret (e.g., `KUBECONFIG_BASE64`), base64 encoded.
 
-#### 🧪 Final Test Flow (When You Push Code)
+#### Final Test Flow (When You Push Code)
 
 Upon a code push to the `main` branch, the GitHub Actions workflow will execute:
 
@@ -416,7 +402,7 @@ Upon a code push to the `main` branch, the GitHub Actions workflow will execute:
 3.  Sealed secrets are applied to the Kubernetes cluster, securely provisioning sensitive data.
 4.  The application is deployed to Kubernetes, utilizing those decrypted secrets.
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 DevOps-Masters-Project/
@@ -442,7 +428,7 @@ DevOps-Masters-Project/
 └── terraform.tfvars.example # Template for tfvars
 ```
 
-## 👋 Contributions
+## Contributions
 
 We welcome contributions! Please follow these steps to contribute:
 
@@ -453,19 +439,20 @@ We welcome contributions! Please follow these steps to contribute:
 5.  Push to your branch: `git push origin feature/your-feature-name`
 6.  Submit a pull request explaining your changes.
 
-## 💡 Upcoming Features
+## Upcoming Features
 
--   🎯 Integration with advanced monitoring tools (e.g., Prometheus, Grafana).
--   🛡️ Enhanced security scanning with DAST/SAST tools.
--   🔄 Automated rollback strategies for failed deployments.
--   📊 Dashboard for CI/CD pipeline health and metrics.
--   ☁️ Multi-cloud deployment options.
+-    Integration with advanced monitoring tools (e.g., Prometheus, Grafana).
+-    Enhanced security scanning with DAST/SAST tools.
+-    Automated rollback strategies for failed deployments.
+-    Dashboard for CI/CD pipeline health and metrics.
+-    Multi-cloud deployment options.
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📧 Contact
+## Contact
 
 **Author Name:** Jivan Jyoti Pal
+
 **Email:**  jivanjyoti.pal@gmail.com
